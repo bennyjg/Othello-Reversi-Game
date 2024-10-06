@@ -138,13 +138,13 @@ class Application:
 
         for row in range(8):
             for col in range(8):
-                x = 137.5 + 75 * col
-                y = 137.5 + 75 * row
+                x = 137 + 75 * col
+                y = 137 + 75 * row
                 if self.game_board.board[row, col] == Board.BLACK:
-                    self.drawBlackDisc((x, y), 32.5, 2.5)
+                    self.drawBlackDisc((x, y), 32, 2)
 
                 elif self.game_board.board[row, col] == Board.WHITE:
-                    self.drawWhiteDisc((x, y), 32.5, 2.5)
+                    self.drawWhiteDisc((x, y), 32, 2)
     
     def markLastMove(self) -> None:
         '''Mark the last move made on the game board'''

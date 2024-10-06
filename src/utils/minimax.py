@@ -1,12 +1,13 @@
 from utils.board import Board
 from copy import deepcopy
+bigInt = 1000000
 
 def minimax(position: Board, depth: int, alpha: int, beta: int, isMaximizingPlayer: bool) -> int:
     if depth == 0 or position.check_game_over() is True:
         return position.evaluate_board()
     
     if isMaximizingPlayer:
-        maxEval = float('-inf')
+        maxEval = -bigInt
         legal_moves = position.all_legal_moves(Board.BLACK)
         for row, col in legal_moves:
             if position.board[row, col] == Board.EMPTY:
@@ -25,7 +26,7 @@ def minimax(position: Board, depth: int, alpha: int, beta: int, isMaximizingPlay
         return maxEval
 
     # else minimizing player's turn
-    minEval = float('+inf')
+    minEval = bigInt
     legal_moves = position.all_legal_moves(Board.WHITE)
     for row, col in legal_moves:
         if position.board[row, col] == Board.EMPTY:
@@ -55,7 +56,7 @@ def find_best_move(position: Board) -> tuple[int, int]:
             position_deepcopy.set_discs(row, col, Board.WHITE)
 
             opponents_moves = position_deepcopy.all_legal_moves(Board.BLACK)
-            currentEval = minimax(position_deepcopy, 3, float('-inf'), float('inf'), opponents_moves != set())
+            currentEval = minimax(position_deepcopy, 3, -bigInt, bigInt, opponents_moves != set())
 
             if currentEval <= bestEval:
                 bestMove = (row, col)
